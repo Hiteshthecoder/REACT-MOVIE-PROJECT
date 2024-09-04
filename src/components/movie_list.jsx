@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import "../styling/movie_list.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 async function getLatestMovies() {
     try {
 
@@ -28,6 +29,7 @@ async function getLatestMovies() {
 let MovieListComponent = () => {
     let change = 0;
     let [movies, setMovies] = useState([]);
+    // let location = useLocation();
 
     useEffect(() => {
 
@@ -36,28 +38,33 @@ let MovieListComponent = () => {
                 setMovies(popularMovies['results']);
             }
         })
-
     }, [])
+
+    // console.log(location.state);
+
+    let navigate = useNavigate();
 
     return <>
         <div id="universalContainer">
-
             {
                 movies ? movies.map(movie => {
-                    return <div className="movieCard" key={movie['id']}>
-                        <img id="moviePoster" src={`https://image.tmdb.org/t/p/original/${movie['poster_path']}`} alt="" />
-
+                    return <div onClick={() => {
+                        navigate(`/movie/${movie['id']}`, {
+                            state: {
+                                'title': movie['title']
+                            }
+                        })
+                    }} className="movieCard" key={movie['id']}>
+                        <img id="moviePoster" src={`https://image.tmdb.org/t/p/original/${movie['poster_path']}`} alt="movieIMG" />
                         <h3>{movie['title']}</h3>
                         <p>{movie['release_date']}</p>
                     </div>
                 }) : null
             }
-
         </div>
+        {/* <Link to={"//webseries"}>Web series  page</Link> */}
     </>
 
 }
-
-
 
 export { MovieListComponent }
