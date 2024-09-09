@@ -22,13 +22,13 @@ async function getLatestMovies() {
     } catch (error) {
 
         return [];
-
     }
 }
 
 let MovieListComponent = () => {
     let change = 0;
     let [movies, setMovies] = useState([]);
+    // state -> data
     // let location = useLocation();
 
     useEffect(() => {
@@ -38,6 +38,7 @@ let MovieListComponent = () => {
                 setMovies(popularMovies['results']);
             }
         })
+
     }, [])
 
     // console.log(location.state);
@@ -49,11 +50,13 @@ let MovieListComponent = () => {
             {
                 movies ? movies.map(movie => {
                     return <div onClick={() => {
+
                         navigate(`/movie/${movie['id']}`, {
                             state: {
                                 'title': movie['title']
                             }
                         })
+
                     }} className="movieCard" key={movie['id']}>
                         <img id="moviePoster" src={`https://image.tmdb.org/t/p/original/${movie['poster_path']}`} alt="movieIMG" />
                         <h3>{movie['title']}</h3>

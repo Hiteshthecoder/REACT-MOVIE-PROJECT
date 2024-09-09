@@ -4,10 +4,9 @@ TMDB READ ACCESS TOKEN - eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2E0YWY5ZjdmOWU1MzI4ZW
 
 image_url -> https://image.tmdb.org/t/p/original/
 
-
 <!-- TODAY COVERUPS
 1.HOW TO PASS DATA FROM ONE ROUTE TO ANOTHER
 2.How to pass state in usenavigate,link,navlink
 3.nested routing
 4.Outlet -> used when we want navigate in nested components.
- -->
+-->
