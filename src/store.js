@@ -7,7 +7,7 @@ import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
 // initial_state -> the initial phase of a store.
 // payload -> the content that is delivered after the reaction to an event or an action. -> object
 
-
+// createslice creats reducer.
 // returns an reducer.
 // how to trigger action ->useDispatch;
 // useSelector 
