@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect, useReducer, useState } from "react"
 import "../styling/movie_list.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllLatestMovies } from "../store";
 async function getLatestMovies() {
     try {
 
@@ -27,19 +29,27 @@ async function getLatestMovies() {
 
 let MovieListComponent = () => {
     let change = 0;
-    let [movies, setMovies] = useState([]);
     // state -> data
     // let location = useLocation();
 
+    // how to trigger an action
+    let getAllMovies = useDispatch();
+
+
+    let data = useSelector((state) => {
+        return state?.movies?.movies;
+    });
+
+    let [movies, setMovies] = useState(data);
+
+
+
+    getAllMovies(fetchAllLatestMovies())
     useEffect(() => {
+        setMovies(data)
+    }, [data])
 
-        getLatestMovies().then((popularMovies) => {
-            if (popularMovies['results']) {
-                setMovies(popularMovies['results']);
-            }
-        })
 
-    }, [])
 
     // console.log(location.state);
 
@@ -48,7 +58,7 @@ let MovieListComponent = () => {
     return <>
         <div id="universalContainer">
             {
-                movies ? movies.map(movie => {
+                movies ? movies?.map(movie => {
                     return <div onClick={() => {
 
                         navigate(`/movie/${movie['id']}`, {
