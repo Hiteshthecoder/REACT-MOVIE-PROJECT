@@ -1,0 +1,8 @@
+SEGA MIDDLEWARE
+
+utility/feature
+
+async , try/catch , await .then -> workflow
+
+action creators -> created an action
+
