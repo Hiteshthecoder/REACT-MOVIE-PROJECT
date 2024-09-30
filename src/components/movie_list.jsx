@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react"
+import { useEffect, useReducer, useState } from "react";
 import "../styling/movie_list.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +22,6 @@ async function getLatestMovies() {
         }
 
     } catch (error) {
-
         return [];
     }
 }
@@ -43,12 +42,10 @@ let MovieListComponent = () => {
     let [movies, setMovies] = useState(data);
 
 
-
     getAllMovies(fetchAllLatestMovies())
     useEffect(() => {
         setMovies(data)
     }, [data])
-
 
 
     // console.log(location.state);
