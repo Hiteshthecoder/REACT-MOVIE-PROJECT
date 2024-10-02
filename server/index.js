@@ -3,9 +3,11 @@
 // express js is an middleware that is used to handle user requests in backend.
 
 const Server = require("express");
-const { json } = require("react-router-dom");
 
 const app = Server();
+
+const mongoose = require("mongoose");
+const { userSchema } = require("./UserSchema.js");
 
 // get request
 
@@ -18,13 +20,29 @@ app.get("/sayHello", function (req, res) {
 });
 
 // post method in express js
-app.post("/getData", function (req, res) {
-    let data = req.body;
-    let { name, hobby } = data;
+app.post("/getData", async function (req, res) {
+    const data = req.body;
+    const { email, password, username } = data;
 
-    res.json({ name, hobby })
+    const user = mongoose.model('users', userSchema);
+
+    await user.create({
+        email: email,
+        password: password,
+        username: username
+    }).then(() => {
+        res.send("data inserted");
+    })
 })
 
+async function connectDatabase(params) {
+
+    return await mongoose.connect("mongodb+srv://hikuprajapati2540:eOmI8c4kL7F72zAg@maincluster.jrf03.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster");
+}
+
+connectDatabase().then(() => {
+    console.log("connected to database");
+})
 
 app.listen(5500, function () {
     console.log("server is online now");
