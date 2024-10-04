@@ -49,10 +49,9 @@ app.post("/checkUser", async function (req, res) {
 
         await user.find({ email: email }).then(function (err, result) {
             if (err) {
-                res.send(err)
+                res.send(err);
             }
             else {
-
                 res.json(result);
             }
         });
@@ -61,9 +60,48 @@ app.post("/checkUser", async function (req, res) {
         console.log(error);
     }
 
+})
+
+
+app.delete("/deleteuser", async function (req, res) {
+    const userData = req.body;
+
+    const { email } = userData;
+
+    const user = mongoose.model('users', userSchema);
+
+    await user.deleteOne({ email: email }).then((data) => {
+        res.send("data deleted successfully")
+    })
+
+})
+
+// post, patch
+app.post("/updateUser", async function (req, res) {
+
+    const userData = req.body;
+
+    const { email, username } = userData;
+
+    const user = mongoose.model('users', userSchema);
+
+
+    await user.updateOne({ email: email }, {
+        username: username
+    }).then(
+        function (err, data) {
+            if (err) {
+                res.send(err)
+            }
+            else {
+                res.send("data updated");
+            }
+        }
+    );
 
 
 })
+
 
 async function connectDatabase(params) {
 
