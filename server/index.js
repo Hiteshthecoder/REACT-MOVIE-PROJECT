@@ -8,6 +8,7 @@ const app = Server();
 
 const mongoose = require("mongoose");
 const { userSchema } = require("./UserSchema.js");
+const { validateUser } = require("./authentication.js");
 
 // get request
 
@@ -20,8 +21,11 @@ app.get("/sayHello", function (req, res) {
 });
 
 // post method in express js
-app.post("/getData", async function (req, res) {
+app.post("/getData", validateUser, async function (req, res) {
     const data = req.body;
+
+
+
     const { email, password, username } = data;
 
     const user = mongoose.model('users', userSchema);
@@ -36,7 +40,7 @@ app.post("/getData", async function (req, res) {
 })
 
 
-app.post("/checkUser", async function (req, res) {
+app.post("/checkUser", validateUser, async function (req, res) {
     try {
 
         const userData = req.body;
@@ -63,7 +67,7 @@ app.post("/checkUser", async function (req, res) {
 })
 
 
-app.delete("/deleteuser", async function (req, res) {
+app.delete("/deleteuser", validateUser, async function (req, res) {
     const userData = req.body;
 
     const { email } = userData;
@@ -77,7 +81,7 @@ app.delete("/deleteuser", async function (req, res) {
 })
 
 // post, patch
-app.post("/updateUser", async function (req, res) {
+app.post("/updateUser", validateUser, async function (req, res) {
 
     const userData = req.body;
 
