@@ -76,7 +76,7 @@ app.delete("/deleteuser", validateUser, async function (req, res) {
 
     await user.deleteOne({ email: email }).then((data) => {
         res.send("data deleted successfully")
-    })
+    });
 
 })
 
@@ -110,6 +110,7 @@ app.post("/updateUser", validateUser, async function (req, res) {
 async function connectDatabase(params) {
 
     return await mongoose.connect("mongodb+srv://hikuprajapati2540:eOmI8c4kL7F72zAg@maincluster.jrf03.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster");
+
 }
 
 connectDatabase().then(() => {

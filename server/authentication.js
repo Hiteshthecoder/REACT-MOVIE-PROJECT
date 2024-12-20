@@ -9,7 +9,10 @@ function validateUser(req, res, next) {
         res.end();
     }
 
-    next();
+    else {
+        next();
+    }
+
 }
 
 module.exports = { validateUser }

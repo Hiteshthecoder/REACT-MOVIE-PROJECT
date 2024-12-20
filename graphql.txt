@@ -1,0 +1,22 @@
+GQL is a query language for api
+
+movie{
+    name
+    thumbnail
+    video
+    songs
+}
+
+type Movie{
+    name:string,
+    thumbnail:string,
+    video: stream<int>
+}
+
+cons
+becuase we have a small amount of data it makes it difficult to use some new logics in future.
+
+pros
+we only have required data
+makes storage more efficient
+makes total request time smaller.
